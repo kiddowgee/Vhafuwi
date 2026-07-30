@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>www.vhafwu.com</title>
+   <link rel="stylesheet" href="css/styles.css">
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Main page header with brand name and logo -->
+  <header>
+    <div class="header-content">
+      <h1 class="header-text">VHAFUWI EGGS AND ATCHAAR</h1>
+      <img class="header-logo" src="images/logo.png" alt="logo" >
+    </div>
+  </header>
+
+  <!-- Global navigation links to other pages -->
+    <nav>
+       <ul>
+           <li><a href="index.html">Home</a></li>
+           <li><a href="registration.html">Registration</a></li>
+           <li><a href="products.html">Products</a></li>
+           <li><a href="contact.html">Contact Us</a></li>
+           <li><a href="staff.html">Staff</a></li>
+       </ul>
+    </nav>
+<main class="main-content">
+  
+    <div class="hero">
+        <img class="hero-image" src="images/heroimage.png" alt="Fresh eggs and homemade atchaar">
+        <div class="hero-text">
+            <h1>Fresh Eggs and home-made Atchaar</h1>
+             <p>Bringing freshly packed eggs and homemade atchaar straight from our street stall to your table in Pretoria.</p>
+           <button type="button" onclick="window.location.href='products.html'">Order Now</button>
+        </div>
+    </div>
+
+     <h2>Our Story</h2>
+    <div class="content">
+       
+
+        <p>Welcome to our street vendor business where we proudly specialize in selling fresh eggs and homemade atchaar. This journey started with a simple passion of bringing everyday essentials and traditional flavors directly to the community. Our eggs are sourced with care to ensure freshness and quality. We offer trays in different sizes which are 6, 18, 30 and 60 to suit every household’s needs and affordability. Whether you are a family cooking breakfast, a baker preparing for orders or a small food outlet stocking up, we make sure you get the right quantity at the right price. Alongside our eggs, we prepare our signature atchaar using traditional recipes passed down through generations after generations. The atchaar is Bold, tangy and full of flavor and it is the perfect companion to pap, bread or meat dishes. For us, selling eggs and atchaar is not just about food but it is about sharing a taste of home and heritage with every customer who stops by.</p>
+
+        <p>What makes our business special is the way we combine affordability with accessibility. We know that life is busy and people need a quick and reliable access to essentials without breaking the bank. That is why we set up in a bustling market street, where customers can easily find us while going about their day to day activities. Some buy in bulk while others pick up just what they need and we welcome them all with the same friendly service. Our eggs are always fresh and our atchaar is prepared with love and care ensuring consistent quality that customers can trust. Over time this reliability has built strong relationships, we do not just sell food but we connect with people. Many of our customers return not only because they enjoy our products but because they feel a personal bond with us. That trust and loyalty are at the heart of our business and we work hard every day to honor it.</p>
+
+        <p>Beyond serving food, our business is about community, culture and entrepreneurship. Street vending is more than just a way to earn a living but it is a way to keep traditions alive and support families in the neighborhood. By selling eggs and atchaar, we are not only meeting nutritional needs but also celebrating local food culture. Atchaar, especially, carries memories of family meals and shared gatherings making it more than just a condiment but a symbol of heritage. Our presence in the market adds to its lively atmosphere where commerce and culture come together. Looking ahead, we see opportunities to grow by adding more essentials like bread, spices or cooking oil creating a one-stop shop for our customers. With word-of-mouth, signage and now this website we hope to reach even more people and strengthen our brand identity. To us, this business is more than selling but it is about resilience, tradition and the spirit of community and we are proud to share it with you.</p>
+    </div>
+  </main>
+
+  <!-- Last visited date shown at the bottom of the main content -->
+  <div class="last-visited" id="lastVisited">Last visited: loading...</div>
+
+  <footer >
+    <ul>
+    <li><a href="tel:+27(0)81-407-7848">&#9742; Telephone</a></li>
+    <li><a href="mailto:vhafuwi.co@gmail.com"> &#9993; Email</a></li>
+    <li><a href="https://maps.google.com/?q=300+Robert+Sobukwe+Street,+Pretoria,+Gauteng,+0002,+SOUTH+AFRICA" target="_blank">&#128506; Location</a></li>
+    <li class="footer-text"> &copy; Vhafuwi Co. All rights reserved.</li>
+    </ul>
+  </footer>
+
+  <!-- Script to set the last visited date on page load -->
+  <script>
+    let lastVisitedElement = document.getElementById('lastVisited');
+    let now = new Date();
+    let formattedDate = now.toLocaleString('en-ZA', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    lastVisitedElement.textContent = `Last visited: ${formattedDate}`;
+  </script>
+</body>
+</html>

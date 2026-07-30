@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>www.vhafwu.com</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="script/scripts.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+        <h1 class="header-text">VHAFUWI EGGS AND ATCHAAR</h1>
+        <img class="header-logo" src="images/logo.png" alt="logo" >
+
+    </div>
+  </header>
+
+<main class="main-content">
+    <nav>
+       <ul>
+           <li><a href="index.html">Home</a></li>
+           <li><a href="registration.html">Registration</a></li>
+           <li><a href="products.html">Products</a></li>
+           <li><a href="contact.html">Contact Us</a></li>
+           <li><a href="staff.html">Staff</a></li>
+       </ul>
+    </nav>
+    <div class="box">
+      <h2>Client Registration Form</h2>
+      <form id="regForm">
+    <fieldset>
+      <legend>Referral</legend>
+      <label>Where did you hear about us?
+        <select id="hearAboutUs" required>
+          <option value="">Select an option</option>
+          <option value="Internet Search">Internet Search</option>
+          <option value="Social Media">Social Media</option>
+          <option value="Friend or Family">Friend or Family</option>
+          <option value="Advertisement">Advertisement</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Personal Details</legend>
+      <label>Preferred Name <input type="text" id="preferredName" required></label>
+      <label>Nickname <input type="text" id="nickname" required></label>
+      <label>Full Name <input type="text" id="fullName" required></label>
+      <label>Surname <input type="text" id="surname" required></label>
+      <label>ID Number <input type="text" id="idNumber" pattern="\d{13}" title="Enter a 13-digit numeric ID number" required></label>
+      <label>Cell Phone (+27) <input type="text" id="phone" required></label>
+      <label>Email <input type="email" id="email" required></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Shipping Address</legend>
+      <label>Street Address <input type="text" id="shippingStreet" required></label>
+      <label>Building Name <input type="text" id="shippingBuilding" required></label>
+      <label>Province
+        <select id="shippingProvince" required>
+          <option value="">Select province</option>
+          <option value="Eastern Cape">Eastern Cape</option>
+          <option value="Free State">Free State</option>
+          <option value="Gauteng">Gauteng</option>
+          <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+          <option value="Limpopo">Limpopo</option>
+          <option value="Mpumalanga">Mpumalanga</option>
+          <option value="North West">North West</option>
+          <option value="Northern Cape">Northern Cape</option>
+          <option value="Western Cape">Western Cape</option>
+        </select>
+      </label>
+      <label>Town/City <input type="text" id="shippingTown" required></label>
+      <label>Zip Code</label>
+      <div class="inline-row">
+        <input type="text" id="shippingZip1" maxlength="1" pattern="\d" inputmode="numeric" required>
+        <input type="text" id="shippingZip2" maxlength="1" pattern="\d" inputmode="numeric" required>
+        <input type="text" id="shippingZip3" maxlength="1" pattern="\d" inputmode="numeric" required>
+        <input type="text" id="shippingZip4" maxlength="1" pattern="\d" inputmode="numeric" required>
+      </div>
+    </fieldset>
+
+    <label><input type="checkbox" id="copyAddress"> Shipping same as billing</label>
+
+    <fieldset>
+      <legend>Billing Address</legend>
+      <label>Street Address <input type="text" id="billingStreet" required></label>
+      <label>Building Name <input type="text" id="billingBuilding" required></label>
+      <label>Province
+        <select id="billingProvince" required>
+          <option value="">Select province</option>
+          <option value="Eastern Cape">Eastern Cape</option>
+          <option value="Free State">Free State</option>
+          <option value="Gauteng">Gauteng</option>
+          <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+          <option value="Limpopo">Limpopo</option>
+          <option value="Mpumalanga">Mpumalanga</option>
+          <option value="North West">North West</option>
+          <option value="Northern Cape">Northern Cape</option>
+          <option value="Western Cape">Western Cape</option>
+        </select>
+      </label>
+      <label>Town/City <input type="text" id="billingTown" required></label>
+      <label>Zip Code <input type="text" id="billingPostalCode" maxlength="4" pattern="\d{4}" inputmode="numeric" required></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Payment Details</legend>
+      <label>Name on Card <input type="text" id="cardName" required></label>
+      <label>Card Type <input type="text" id="cardType" class="readonly" readonly placeholder="Detected automatically"></label>
+      <label>Card Number <input type="text" id="cardNumber" maxlength="19" inputmode="numeric" required></label>
+      <div class="inline-row">
+        <label>Expiration Date <input type="text" id="expirationDate" placeholder="MM/YYYY" maxlength="7" pattern="\d{2}/\d{4}" inputmode="numeric" required></label>
+        <label>CVC <input type="text" id="cvc" maxlength="4" inputmode="numeric" required></label>
+      </div>
+      <p class="section-note">Card type and required number of digits are detected automatically.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Account Credentials</legend>
+      <label>Username <input type="text" id="username" required></label>
+      <label>Password <input type="password" id="password" required></label>
+      <p class="password-help">Password must be at least 8 characters long and include at least one uppercase letter, one digit, and one symbol: ! @ # $.</p>
+      <label>Confirm Password <input type="password" id="confirmPassword" required></label>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+    <p class="error" id="errorMsg"></p>
+      </form>
+    </div>
+</main>
+ <footer >
+    <ul>
+    <li><a href="tel:+27(0)81-407-7848">&#9742; Telephone</a></li>
+    <li><a href="mailto:vhafuwi.co@gmail.com"> &#9993; Email</a></li>
+    <li><a href="https://maps.google.com/?q=300+Robert+Sobukwe+Street,+Pretoria,+Gauteng,+0002,+SOUTH+AFRICA" target="_blank">&#128506; Location</a></li>
+    <li class="footer-text"> &copy; Vhafuwi Co. All rights reserved.</li>
+    </ul>
+  </footer>
+</body>
+</html>

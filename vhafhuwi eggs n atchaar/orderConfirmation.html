@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - Vhafuwi Eggs and Atchaar</title>
+  <link rel="stylesheet" href="css/ordeconfirmation-styles.css">
+  
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="header-text">VHAFUWI EGGS AND ATCHAAR</h1>
+      <img class="header-logo" src="images/logo.png" alt="logo">
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="registration.html">Registration</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="staff.html">Staff</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <div class="box">
+      <h2>Order Confirmation</h2>
+      <p><strong>Preferred Name:</strong> <span id="preferredName"></span></p>
+      <p><strong>Surname:</strong> <span id="surname"></span></p>
+      <p><strong>ID Number:</strong> <span id="idNumber"></span></p>
+      <p><strong>Cell Phone Number:</strong> <span id="phone"></span></p>
+      <p><strong>E-mail:</strong> <span id="email"></span></p>
+      <p><strong>Shipping Address:</strong> <span id="shipping"></span></p>
+      <p><strong>Billing Address:</strong> <span id="billing"></span></p>
+
+      <div class="selected-products">
+        <h3>Selected Products</h3>
+        <p id="selectedProductsMessage">Loading order details...</p>
+        <table class="order-products-table" id="selectedProductsTable">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Extra</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="selectedProductsList"></tbody>
+        </table>
+        <p><strong>Product Total:</strong> <span id="productsTotal"></span></p>
+        <p><strong>VAT (15%):</strong> <span id="vatAmount"></span></p>
+        <p><strong>Total Amount Due:</strong> <span id="totalOwed"></span></p>
+      </div>
+
+      <hr>
+      <h3>Payment Details</h3>
+      <p><strong>Name on Credit Card:</strong> <span id="cardNameDisplay"></span></p>
+      <p><strong>Credit Card Type:</strong> <span id="cardType"></span></p>
+      <p><strong>Credit Card Number:</strong> <span id="cardNumber"></span></p>
+      <p><strong>Payment Amount:</strong> <span id="amount"></span></p>
+
+      <div class="box-buttons">
+        <button id="confirmBtn">Confirm</button>
+        <button id="editBtn">Edit</button>
+        <button id="clearBtn">Clear Order</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="tel:+27(0)81-407-7848">&#9742; Telephone</a></li>
+      <li><a href="mailto:vhafuwi.co@gmail.com">&#9993; Email</a></li>
+      <li><a href="https://maps.google.com/?q=300+Robert+Sobukwe+Street,+Pretoria,+Gauteng,+0002,+SOUTH+AFRICA" target="_blank">&#128506; Location</a></li>
+      <li class="footer-text">&copy; Vhafuwi Co. All rights reserved.</li>
+    </ul>
+  </footer>
+
+  <script>
+    function maskID(id) {
+      if (!id) return '';
+      return id.slice(0,4) + '*********';
+    }
+    function maskCard(card) {
+      if (!card) return '';
+      var visible = card.slice(-4);
+      return '**** **** **** ' + visible;
+    }
+    document.getElementById('preferredName').textContent = localStorage.getItem('preferredName');
+    document.getElementById('surname').textContent = localStorage.getItem('surname');
+    document.getElementById('idNumber').textContent = maskID(localStorage.getItem('idNumber'));
+    document.getElementById('phone').textContent = localStorage.getItem('phone');
+    document.getElementById('email').textContent = localStorage.getItem('email');
+    document.getElementById('shipping').textContent = localStorage.getItem('shipping');
+    document.getElementById('billing').textContent = localStorage.getItem('billing');
+    document.getElementById('cardNameDisplay').textContent = localStorage.getItem('cardName');
+    document.getElementById('cardType').textContent = localStorage.getItem('cardType');
+    document.getElementById('cardNumber').textContent = maskCard(localStorage.getItem('cardNumber'));
+    const amountElement = document.getElementById('amount');
+    if (amountElement) {
+      amountElement.textContent = localStorage.getItem('amount') || '';
+    }
+
+    function parseProductsFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      const itemsJson = params.get('items');
+      const productsTotal = document.getElementById('productsTotal');
+      const productsList = document.getElementById('selectedProductsList');
+      const productsMessage = document.getElementById('selectedProductsMessage');
+      const productsTable = document.getElementById('selectedProductsTable');
+
+      if (!itemsJson) {
+        productsMessage.textContent = 'No products were added to the order.';
+        productsTotal.textContent = 'R0.00';
+        productsTable.style.display = 'none';
+        return;
+      }
+
+      try {
+        const items = JSON.parse(itemsJson);
+        if (!Array.isArray(items) || items.length === 0) {
+          throw new Error('No items');
+        }
+
+        productsList.innerHTML = '';
+        let lineTotalSum = 0;
+
+        items.forEach(item => {
+          const row = document.createElement('tr');
+          const extraDisplay = Number(item.extra) > 0 ? `R${Number(item.extra).toFixed(2)}` : 'N/A';
+          row.innerHTML = `
+            <td>${item.name}</td>
+            <td class="right-align">R${Number(item.price).toFixed(2)}</td>
+            <td class="right-align">${item.quantity}</td>
+            <td class="right-align">${extraDisplay}</td>
+            <td class="right-align">R${Number(item.total).toFixed(2)}</td>
+          `;
+          productsList.appendChild(row);
+          lineTotalSum += Number(item.total) || 0;
+        });
+
+        productsTable.style.display = 'table';
+        productsMessage.textContent = '';
+        let productTotal = Number(lineTotalSum.toFixed(2));
+        let vat = Number((productTotal * 0.15).toFixed(2));
+        let totalOwed = Number((productTotal + vat).toFixed(2));
+
+        productsTotal.textContent = `R${productTotal.toFixed(2)}`;
+        document.getElementById('vatAmount').textContent = `R${vat.toFixed(2)}`;
+        document.getElementById('totalOwed').textContent = `R${totalOwed.toFixed(2)}`;
+        if (amountElement && !amountElement.textContent) {
+          amountElement.textContent = `R${totalOwed.toFixed(2)}`;
+        }
+      } catch (error) {
+        productsMessage.textContent = 'There was a problem loading the selected products.';
+        productsTotal.textContent = 'R0.00';
+        document.getElementById('vatAmount').textContent = 'R0.00';
+        document.getElementById('totalOwed').textContent = 'R0.00';
+        productsTable.style.display = 'none';
+      }
+    }
+
+    function createOrderReference() {
+      const timestamp = Date.now().toString();
+      const randomPart = Math.floor(Math.random() * 900 + 100).toString();
+      return `VH-${timestamp}-${randomPart}`;
+    }
+
+    function buildReceiptUrl() {
+      const preferredName = localStorage.getItem('preferredName') || '';
+      const surname = localStorage.getItem('surname') || '';
+      const phone = localStorage.getItem('phone') || '';
+      const email = localStorage.getItem('email') || '';
+      const shipping = localStorage.getItem('shipping') || '';
+      const totalOwedText = document.getElementById('totalOwed').textContent || 'R0.00';
+      const total = totalOwedText.replace(/[^0-9.]/g, '');
+      const itemsJson = new URLSearchParams(window.location.search).get('items') || '[]';
+      const orderRef = createOrderReference();
+
+      const params = new URLSearchParams();
+      params.set('preferredName', preferredName);
+      params.set('surname', surname);
+      params.set('phone', phone);
+      params.set('email', email);
+      params.set('shipping', shipping);
+      params.set('totalCost', total);
+      params.set('items', itemsJson);
+      params.set('orderRef', orderRef);
+
+      return `receipt.html?${params.toString()}`;
+    }
+
+    function clearOrderData() {
+      let fieldsToClear = ['preferredName', 'surname', 'idNumber', 'phone', 'email', 'shipping', 'billing', 'cardNameDisplay', 'cardType', 'cardNumber', 'amount', 'productsTotal', 'vatAmount', 'totalOwed'];
+      fieldsToClear.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '';
+      });
+
+      document.getElementById('selectedProductsMessage').textContent = 'Order cleared.';
+      let productsList = document.getElementById('selectedProductsList');
+      let productsTable = document.getElementById('selectedProductsTable');
+      productsList.innerHTML = '';
+      productsTable.style.display = 'none';
+
+      if (window.history.replaceState) {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
+    }
+
+    parseProductsFromQuery();
+
+    document.getElementById('confirmBtn').addEventListener('click', function(){
+      window.location.href = buildReceiptUrl();
+    });
+    document.getElementById('editBtn').addEventListener('click', function(){
+      window.history.back();
+    });
+    document.getElementById('clearBtn').addEventListener('click', clearOrderData);
+  </script>
+</body>
+</html>
