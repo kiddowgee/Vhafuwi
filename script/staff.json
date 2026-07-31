@@ -1,0 +1,82 @@
+[
+  {
+    "staffNumber": 1,
+    "firstName": "Tshifhiwa",
+    "lastName": "Rhambau",
+    "jobDescription": "Vendor Owner",
+    "workPhoneNumber": "+27 81 407 7848",
+    "workEmailAddress": "vhafuwi.co@gmail.com"
+  },
+  {
+    "staffNumber": 2,
+    "firstName": "Sipho",
+    "lastName": "Ndaba",
+    "jobDescription": "Atchaar Maker",
+    "workPhoneNumber": "+27 82 234 5678",
+    "workEmailAddress": "sipho.ndaba@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 3,
+    "firstName": "Nomsa",
+    "lastName": "Hlongwane",
+    "jobDescription": "Egg Quality Checker",
+    "workPhoneNumber": "+27 82 345 6789",
+    "workEmailAddress": "nomsa.hlongwane@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 4,
+    "firstName": "Zanele",
+    "lastName": "Mokoena",
+    "jobDescription": "Digital Marketer",
+    "workPhoneNumber": "+27 82 456 7890",
+    "workEmailAddress": "zanele.mokoena@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 5,
+    "firstName": "Thabo",
+    "lastName": "Mahlangu",
+    "jobDescription": "Stock Keeper",
+    "workPhoneNumber": "+27 82 567 8901",
+    "workEmailAddress": "thabo.mahlangu@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 6,
+    "firstName": "Lehlohonolo",
+    "lastName": "Dlamini",
+    "jobDescription": "Assistant Vendor",
+    "workPhoneNumber": "+27 82 678 9012",
+    "workEmailAddress": "lehlohonolo.dlamini@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 7,
+    "firstName": "Fatima",
+    "lastName": "Peters",
+    "jobDescription": "Bookkeeper",
+    "workPhoneNumber": "+27 82 789 0123",
+    "workEmailAddress": "fatima.peters@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 8,
+    "firstName": "Kgothatso",
+    "lastName": "Mabena",
+    "jobDescription": "Delivery Assistant",
+    "workPhoneNumber": "+27 82 890 1234",
+    "workEmailAddress": "kgothatso.mabena@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 9,
+    "firstName": "Precious",
+    "lastName": "Mathebula",
+    "jobDescription": "Atchaar Quality Checker",
+    "workPhoneNumber": "+27 82 901 2345",
+    "workEmailAddress": "precious.mathebula@vhafuwieggsandatchaar.com"
+  },
+  {
+    "staffNumber": 10,
+    "firstName": "Nokuthula",
+    "lastName": "Zondi",
+    "jobDescription": "Customer Service",
+    "workPhoneNumber": "+27 82 012 3456",
+    "workEmailAddress": "nokuthula.zondi@vhafuwieggsandatchaar.com"
+  }
+]

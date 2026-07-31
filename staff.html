@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VHAFUWI Eggs and Atchaar - Staff Directory</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="header-text">VHAFUWI EGGS AND ATCHAAR</h1>
+      <img class="header-logo" src="images/logo.png" alt="logo">
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="registration.html">Registration</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="staff.html">Staff</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <section class="staff-directory">
+      <h2>Staff Directory</h2>
+      <p>Meet the team behind our street vendor business selling fresh eggs and homemade atchaar.</p>
+
+      <div class="table-wrapper">
+        <p id="staffStatus" class="section-note">Loading staff directory...</p>
+        <table class="staff-table">
+        <thead>
+          <tr>
+            <th>Staff Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Job Description</th>
+            <th>Work Phone Number</th>
+            <th>Work Email Address</th>
+          </tr>
+        </thead>
+        <tbody id="staffList"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="tel:+27(0)81-407-7848">&#9742; Telephone</a></li>
+      <li><a href="mailto:vhafuwi.co@gmail.com">&#9993; Email</a></li>
+      <li><a href="https://maps.google.com/?q=300+Robert+Sobukwe+Street,+Pretoria,+Gauteng,+0002,+SOUTH+AFRICA" target="_blank">&#128506; Location</a></li>
+      <li class="footer-text">&copy; Vhafuwi Co. All rights reserved.</li>
+    </ul>
+  </footer>
+
+  <script>
+    // Fetch staff data from JSON file and render it inside the staff directory table.
+    let staffList = document.getElementById('staffList');
+    let staffStatus = document.getElementById('staffStatus');
+
+    fetch('script/staff.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+          staffStatus.textContent = 'No staff members found.';
+          return;
+        }
+
+        staffStatus.textContent = '';
+        staffList.innerHTML = '';
+
+        data.forEach(member => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${member.staffNumber}</td>
+            <td>${member.firstName}</td>
+            <td>${member.lastName}</td>
+            <td>${member.jobDescription}</td>
+            <td>${member.workPhoneNumber}</td>
+            <td>${member.workEmailAddress}</td>
+          `;
+          staffList.appendChild(row);
+        });
+      })
+      .catch(error => {
+        staffStatus.textContent = 'Unable to load staff directory at this time.';
+        console.error('Staff JSON fetch error:', error);
+      });
+  </script>
+</body>
+</html>

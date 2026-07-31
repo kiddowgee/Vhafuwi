@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt - Vhafuwi Eggs and Atchaar</title>
+  <link rel="stylesheet" href="css/ordeconfirmation-styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="header-text">VHAFUWI EGGS AND ATCHAAR</h1>
+      <img class="header-logo" src="images/logo.png" alt="logo">
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="registration.html">Registration</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="staff.html">Staff</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <div class="box">
+      <h2>Receipt</h2>
+      <p>Your order has been confirmed and payment has been received. Please keep this receipt for your records.</p>
+      <p><strong>Order Reference:</strong> <span id="orderRef"></span></p>
+
+      <div class="receipt-details">
+        <p><strong>Preferred Name:</strong> <span id="preferredName"></span></p>
+        <p><strong>Surname:</strong> <span id="surname"></span></p>
+        <p><strong>Cell Phone Number:</strong> <span id="phone"></span></p>
+        <p><strong>E-mail:</strong> <span id="email"></span></p>
+        <p><strong>Shipping Address:</strong> <span id="shipping"></span></p>
+        <p><strong>Total Cost:</strong> <span id="totalCost"></span></p>
+      </div>
+
+      <div class="receipt-items">
+        <h3>Items Ordered</h3>
+        <table class="order-products-table" id="receiptProductsTable">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Extra</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="receiptProductsList"></tbody>
+        </table>
+        <p id="receiptProductMessage"></p>
+      </div>
+
+      <div class="box-buttons">
+        <button onclick="window.location.href='index.html'">Return Home</button>
+        <button onclick="window.history.back()">Back</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="tel:+27(0)81-407-7848">&#9742; Telephone</a></li>
+      <li><a href="mailto:vhafuwi.co@gmail.com">&#9993; Email</a></li>
+      <li><a href="https://maps.google.com/?q=300+Robert+Sobukwe+Street,+Pretoria,+Gauteng,+0002,+SOUTH+AFRICA" target="_blank">&#128506; Location</a></li>
+      <li class="footer-text">&copy; Vhafuwi Co. All rights reserved.</li>
+    </ul>
+  </footer>
+
+  <script>
+    function getQueryValue(name) {
+      let params = new URLSearchParams(window.location.search);
+      return params.get(name) || '';
+    }
+
+    function formatCost(value) {
+      if (!value) return 'R0.00';
+      return value.toString().startsWith('R') ? value : `R${Number(value).toFixed(2)}`;
+    }
+
+    function parseReceiptItems() {
+      let itemsJson = getQueryValue('items');
+      let receiptProductsList = document.getElementById('receiptProductsList');
+      let receiptProductsTable = document.getElementById('receiptProductsTable');
+      let productMessage = document.getElementById('receiptProductMessage');
+
+      if (!itemsJson) {
+        receiptProductsTable.style.display = 'none';
+        productMessage.textContent = 'No ordered items were found for this receipt.';
+        return;
+      }
+
+      try {
+        const items = JSON.parse(itemsJson);
+        if (!Array.isArray(items) || items.length === 0) {
+          throw new Error('No ordered items');
+        }
+
+        receiptProductsList.innerHTML = '';
+        items.forEach(item => {
+          const row = document.createElement('tr');
+          const extraDisplay = Number(item.extra) > 0 ? `R${Number(item.extra).toFixed(2)}` : 'N/A';
+          row.innerHTML = `
+            <td>${item.name}</td>
+            <td class="right-align">R${Number(item.price).toFixed(2)}</td>
+            <td class="right-align">${item.quantity}</td>
+            <td class="right-align">${extraDisplay}</td>
+            <td class="right-align">R${Number(item.total).toFixed(2)}</td>
+          `;
+          receiptProductsList.appendChild(row);
+        });
+
+        productMessage.textContent = '';
+        receiptProductsTable.style.display = 'table';
+      } catch (error) {
+        receiptProductsTable.style.display = 'none';
+        productMessage.textContent = 'Unable to load ordered items for this receipt.';
+      }
+    }
+
+    document.getElementById('preferredName').textContent = decodeURIComponent(getQueryValue('preferredName')) || 'Not provided';
+    document.getElementById('surname').textContent = decodeURIComponent(getQueryValue('surname')) || 'Not provided';
+    document.getElementById('phone').textContent = decodeURIComponent(getQueryValue('phone')) || 'Not provided';
+    document.getElementById('email').textContent = decodeURIComponent(getQueryValue('email')) || 'Not provided';
+    document.getElementById('shipping').textContent = decodeURIComponent(getQueryValue('shipping')) || 'Not provided';
+    document.getElementById('totalCost').textContent = formatCost(getQueryValue('totalCost'));
+    document.getElementById('orderRef').textContent = decodeURIComponent(getQueryValue('orderRef')) || `VH-${Date.now()}`;
+    parseReceiptItems();
+  </script>
+</body>
+</html>
