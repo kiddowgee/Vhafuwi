@@ -344,8 +344,7 @@
       localStorage.setItem('billingPostalCode', billingPostalCode.value);
       localStorage.setItem('cardName', cardName.value);
       localStorage.setItem('cardType', cardType.value);
-      localStorage.setItem('cardNumber', cardNumber.value);
+      // Do not store sensitive payment data (card number / CVC) in localStorage.
       localStorage.setItem('expirationDate', expirationDate.value);
-      localStorage.setItem('cvc', cvc.value);
       window.location.href = 'orderConfirmation.html';
     });
